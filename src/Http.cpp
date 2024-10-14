@@ -152,25 +152,7 @@ namespace Tina {
         const int flags = fcntl(fd, F_GETFL, 0);
         return fcntl(fd, F_SETFL, flags | O_NONBLOCK);
     }
-
-    /*void Http::handleRequest(intptr_t client_sockfd) {
-        printf("handleRequest %ld\n", client_sockfd);
-        // 构建HTTP响应
-        const std::string response =
-                "HTTP/1.1 200 OK\r\n"
-                "Content-Type: text/plain\r\n"
-                "Content-Length: 2\r\n"
-                "\r\n"
-                "OK";
-
-        // 发送响应给客户端
-        ssize_t bytes_sent = send(client_sockfd, response.c_str(), response.size(), 0);
-        if (bytes_sent == -1) {
-            perror("send");
-        }
-        close(client_sockfd);
-    }*/
-
+    
     void Http::handleRequest(intptr_t client_sockfd) {
         char buffer[1024];
         ssize_t bytes_received = recv(client_sockfd, buffer, sizeof(buffer) - 1, 0);
@@ -194,10 +176,5 @@ namespace Tina {
             }
         }
     }
-
-    /*void *Http::threadRoutine(void *arg) {
-        auto client_sockfd = reinterpret_cast<intptr_t>(arg);
-        handleRequest(client_sockfd);
-        return nullptr;
-    }*/
+    
 }
